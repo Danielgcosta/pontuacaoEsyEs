@@ -6,9 +6,9 @@
 //Declaração de variáveis:
 	var ciclo="3º";
 	var ano="2015";
-	var phoenixPontos=0;
-	var morcegoPontos=0;	
-	var castorPontos=0;
+	var phoenixPontos=10;
+	var morcegoPontos=10;	
+	var castorPontos=10;
 	var dataAtualizacao="03/10/2015";
 	
 	var pontos =[null,null,null];
