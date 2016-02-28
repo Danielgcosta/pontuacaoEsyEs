@@ -1,15 +1,36 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
+<?php
+require "./init.php";
+
+$patrols=['Castor','Morcego','Phoenix'];
+for($i=0;$i<3;$i++){
+	$patrol = $patrols[$i];
+	$select_sql = "SELECT * FROM `pontuacao` WHERE `patrol` LIKE '$patrol' ORDER BY `patrol` ASC";
+	$result = mysqli_query($conn,$select_sql);
+	$row = mysqli_fetch_array($result);
+	$patrol_nome = $row["patrol"];
+	$patrol_pontuacao = $row["score"];?>	
+	
+	<?php if($patrol_nome=="Castor"){?>
+		<script>var castorPontos = <?php echo $patrol_pontuacao;?> </script><?php
+	}
+	elseif($patrol_nome=="Morcego"){?>
+		<script>var morcegoPontos=<?php echo $patrol_pontuacao;?></script><?php
+	}
+	elseif($patrol_nome=="Phoenix"){?>
+		<script>var phoenixPontos=<?php echo $patrol_pontuacao;?></script><?php	
+	}
+}
+?>
+
 <script>
 
 //Declaração de variáveis:
-	var ciclo="3º";
-	var ano="2015";
-	var phoenixPontos=10;
-	var morcegoPontos=10;	
-	var castorPontos=10;
-	var dataAtualizacao="03/10/2015";
+	var ciclo="1º";
+	var ano="2016";
+	var dataAtualizacao="27/10/2016";
 	
 	var pontos =[null,null,null];
 	var nomePatrulha = ["","",""];
@@ -246,8 +267,10 @@ function defEsferas()
 
 </script>
 
-<HEAD><TITLE>Pontuação das Patrulhas</TITLE>
-<META content='width=device-width, initial-scale=1,maximum-scale=2' name='viewport1'; charset=UTF-8">
+<HEAD>
+<TITLE>Pontuação das Patrulhas</TITLE>
+<meta name="wot-verification" content="bb43fa2c5ab29ca5ae5b"/>
+<META content='width=device-width, initial-scale=1,maximum-scale=2' name='viewport1'; charset='utf8mb4'>
 <STYLE type="text/css">
 	* {
 		background-repeat: no-repeat;
@@ -302,7 +325,7 @@ function defEsferas()
 	<tr height=100%>
 		<td></td>
 		<td>
-			<p><font size="6" color="green" font-family="Myriad Pro"><a><script type="text/javascript">document.write(ciclo);</script></a> Ciclo de <a><script type="text/javascript">document.write(ano);</script></a> - Resultado parcial<br>Pontuação das Patrulhas</font></p>
+			<p><font size="6" color="green" font-family="Myriad Pro"><a><script type="text/javascript">document.write(ciclo);</script></a> Ciclo de <a><script type="text/javascript">document.write(ano);</script></a> - Result. parcial<br>Pontuação das Patrulhas</font></p>
 		</td>
 		<td></td>
 	</tr>
@@ -368,7 +391,10 @@ function defEsferas()
 	<tr height="20">
 		<td></td>
 		<td height="18" align="right">
-			<a href="http://pontuacao.esy.es/img/listaPontos.png" target="_blank"><font size="2" color="white">Veja aqui as regras de pontuação</a></font>
+
+<!--comentado até atualizar a listagem de pontuação 
+			<a href="http://www.pontuacao.esy.es/img/listaPontos.png" target="_blank"><font size="2" color="white">Veja aqui as regras de pontuação</a></font>
+-->	
 			<font size="2" color="yellow">(atualizado em <a><script type="text/javascript">document.write(dataAtualizacao);</script></a>)</font>
 		</td>
 		<td></td>
