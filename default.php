@@ -3,39 +3,24 @@
 
 <?php
 require "./init.php";
+header('Content-Type: text/html; charset=ISO-8859-1');
 
-$patrols=['Castor','Morcego','Phoenix'];
-for($i=0;$i<3;$i++){
-	$patrol = $patrols[$i];
-	$select_sql = "SELECT * FROM `pontuacao` WHERE `patrol` LIKE '$patrol' ORDER BY `patrol` ASC";
-	$result = mysqli_query($conn,$select_sql);
-	$row = mysqli_fetch_array($result);
-	$patrol_nome = $row["patrol"];
-	$patrol_pontuacao = $row["score"];?>	
-	
-	<?php if($patrol_nome=="Castor"){?>
-		<script>var castorPontos = <?php echo $patrol_pontuacao;?> </script><?php
-	}
-	elseif($patrol_nome=="Morcego"){?>
-		<script>var morcegoPontos=<?php echo $patrol_pontuacao;?></script><?php
-	}
-	elseif($patrol_nome=="Phoenix"){?>
-		<script>var phoenixPontos=<?php echo $patrol_pontuacao;?></script><?php	
-	}
-}
+$row_ciclo = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `ano_e_ciclo` ORDER BY `ano` DESC LIMIT 1"));
+$row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `data` DESC LIMIT 1"));
 ?>
-
 <script>
-
-//Declaração de variáveis:
-	var ciclo="1º";
-	var ano="2016";
-	var dataAtualizacao="27/10/2016";
+	var ciclo="<?php echo $row_ciclo[1]; ?>";
+	var ano = "<?php echo $row_ciclo[0]; ?>";
+	var dataAtualizacao="<?php echo $row_score[3]; ?>";
 	
 	var pontos =[null,null,null];
 	var nomePatrulha = ["","",""];
 	var esferas = ["","",""];
-	var	colocacoes = ["1º","2º","3º"];
+	var	colocacoes = ["1°","2°","3°"];
+
+	var castorPontos  = <?php echo $row_score[0]; ?>;
+	var morcegoPontos = <?php echo $row_score[1]; ?>;
+	var phoenixPontos = <?php echo $row_score[2]; ?>;
 	
 //Definição da ordem das patrulhas
 if (castorPontos > phoenixPontos)
@@ -59,7 +44,7 @@ if (castorPontos > phoenixPontos)
 				nomePatrulha[1] = "Morcego";
 				pontos[2] = phoenixPontos;	//P2
 				nomePatrulha[2] = "Phoenix";
-				colocacoes = ["1º","2º","2º"];
+				colocacoes = ["1°","2°","2°"];
 			}
 			else	//C1, P2, M3
 			{
@@ -80,7 +65,7 @@ if (castorPontos > phoenixPontos)
 			nomePatrulha[1] = "Morcego";
 			pontos[2] = phoenixPontos;	//P2
 			nomePatrulha[2] = "Phoenix";
-			colocacoes = ["1º","1º","2º"];
+			colocacoes = ["1°","1°","2°"];
 		}
 		else	//M1, C2, P3
 		{
@@ -105,7 +90,7 @@ else
 			nomePatrulha[1] = "Phoenix";
 			pontos[2] = morcegoPontos;	//M2
 			nomePatrulha[2] = "Morcego";
-			colocacoes = ["1º","1º","2º"];			
+			colocacoes = ["1°","1°","2°"];			
 		}
 		else
 		{
@@ -117,7 +102,7 @@ else
 				nomePatrulha[1] = "Morcego";
 				pontos[2] = phoenixPontos;	//P1
 				nomePatrulha[2] = "Phoenix";
-				colocacoes = ["1º","1º","1º"];
+				colocacoes = ["1°","1°","1°"];
 			}
 			else	//M1, C2, P2
 			{
@@ -127,7 +112,7 @@ else
 				nomePatrulha[1] = "Castor";								
 				pontos[2] = phoenixPontos;	//P2
 				nomePatrulha[2] = "Phoenix";
-				colocacoes = ["1º","2º","2º"];
+				colocacoes = ["1°","2°","2°"];
 			}
 		}
 	}
@@ -152,7 +137,7 @@ else
 				nomePatrulha[1] = "Phoenix";	
 				pontos[2] = castorPontos;	//C2
 				nomePatrulha[2] = "Castor";					
-				colocacoes = ["1º","1º","2º"];
+				colocacoes = ["1°","1°","2°"];
 			}
 			else
 			{
@@ -173,7 +158,7 @@ else
 						nomePatrulha[1] = "Castor";							
 						pontos[2] = morcegoPontos;	//M2
 						nomePatrulha[2] = "Morcego";
-						colocacoes = ["1º","2º","2º"];						
+						colocacoes = ["1°","2°","2°"];						
 					}
 					else	//P1, C2, M3
 					{
@@ -269,8 +254,8 @@ function defEsferas()
 
 <HEAD>
 <TITLE>Pontuação das Patrulhas</TITLE>
-<meta name="wot-verification" content="bb43fa2c5ab29ca5ae5b"/>
-<META content='width=device-width, initial-scale=1,maximum-scale=2' name='viewport1'; charset='utf8mb4'>
+<meta name="wot-verification" charset="utf-8" content="bb43fa2c5ab29ca5ae5b"/>
+<META content='width=device-width, initial-scale=1,maximum-scale=2' name='viewport1'; charset='utf-8'>
 <STYLE type="text/css">
 	* {
 		background-repeat: no-repeat;
@@ -325,7 +310,7 @@ function defEsferas()
 	<tr height=100%>
 		<td></td>
 		<td>
-			<p><font size="6" color="green" font-family="Myriad Pro"><a><script type="text/javascript">document.write(ciclo);</script></a> Ciclo de <a><script type="text/javascript">document.write(ano);</script></a> - Result. parcial<br>Pontuação das Patrulhas</font></p>
+			<p><font size="6" color="green" font-family="Myriad Pro"><a><script type="text/javascript">document.write(ciclo);</script></a>º Ciclo de <a><script type="text/javascript">document.write(ano);</script></a> - Result. parcial<br>Pontuação das Patrulhas</font></p>
 		</td>
 		<td></td>
 	</tr>
@@ -351,7 +336,7 @@ function defEsferas()
 				</tr>
 				<tr height="40" margin=0> <!--3 row-->
 					<td rowspan="3" align="center">
-						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere1">	<!--impressão da esfera do 1º lugar-->
+						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere1">	<!--impressão da esfera do 1° lugar-->
 						<img src="img/morcego.png" width="160" height="160" style="display: none;" id="morcegoSphere1"/>
 						<img src="img/phoenix.png" width="160" height="160" style="display: none;" id="phoenixSphere1"/>	
 					</td>
@@ -360,7 +345,7 @@ function defEsferas()
 				</tr>
 				<tr height="40"> <!--4 row-->
 					<td rowspan="3" align="center">
-						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere2">	<!--impressão da esfera do 2º lugar-->
+						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere2">	<!--impressão da esfera do 2° lugar-->
 						<img src="img/morcego.png" width="160" height="160" style="display: none;" id="morcegoSphere2"/>
 						<img src="img/phoenix.png" width="160" height="160" style="display: none;" id="phoenixSphere2"/>	
 					</td>
@@ -368,7 +353,7 @@ function defEsferas()
 				</tr>
 				<tr height="60"> <!--5 row-->
 					<td rowspan="3" align="center">
-						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere3">	<!--impressão da esfera do 3º lugar-->
+						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere3">	<!--impressão da esfera do 3° lugar-->
 						<img src="img/morcego.png" width="160" height="160" style="display: none;" id="morcegoSphere3"/>
 						<img src="img/phoenix.png" width="160" height="160" style="display: none;" id="phoenixSphere3"/>	
 					</td>

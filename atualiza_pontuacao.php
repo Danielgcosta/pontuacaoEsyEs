@@ -1,11 +1,13 @@
 <?php
+require "./init.php";
+
 $patrol = 'Phoenix';
 $atualizacao = 25;
 
 //Pega valor atual
 $server_name='localhost';
 $mysql_user='root';
-$mysql_pass='driver8';
+$mysql_pass='';
 $db_name='tropaescoteira';
 $conn=mysqli_connect($server_name,$mysql_user,$mysql_pass,$db_name);
 if (!$conn){
