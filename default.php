@@ -8,10 +8,9 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 $row_ciclo = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `ano_e_ciclo` ORDER BY `ano` DESC LIMIT 1"));
 $row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `data` DESC LIMIT 1"));
 ?>
-<script>	
-// Ajustando a data para dd/mm/yyyy
+<script>
 	var data = new Date("<?php echo $row_score[3]; ?>");
-	var dd = data.getDate();
+	var dd = data.getDate()+1;
 	var mm = data.getMonth()+1; //January is 0!
 	var yyyy = data.getFullYear();
 	if(dd<10) {
@@ -21,7 +20,6 @@ $row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDE
 		mm='0'+mm
 	}
 	data = dd+'/'+mm+'/'+yyyy;
-//
 	
 	var ciclo="<?php echo $row_ciclo[1]; ?>";
 	var ano = "<?php echo $row_ciclo[0]; ?>";
@@ -267,8 +265,7 @@ function defEsferas()
 
 <HEAD>
 <TITLE>Pontuação das Patrulhas</TITLE>
-<meta name="wot-verification" charset="utf-8" content="bb43fa2c5ab29ca5ae5b"/>
-<META content='width=device-width, initial-scale=1,maximum-scale=2' name='viewport1'; charset='utf-8'>
+<meta name="wot-verification" charset="utf-8" content='width=device-width, initial-scale=1,maximum-scale=2'; charset='utf-8'>
 <STYLE type="text/css">
 	* {
 		background-repeat: no-repeat;

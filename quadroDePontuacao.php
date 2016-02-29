@@ -1,6 +1,9 @@
-<!DOCTYPE HTML> 
-<html>
+<HTML>
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
 <head>
+<TITLE>Atualização de pontuação numérica</TITLE>
+<meta name="wot-verification" charset="utf-8" content='width=device-width, initial-scale=1,maximum-scale=2'; charset='utf-8'>
 <style>
 .error {color: #FF0000;}
 a.button {
@@ -13,8 +16,8 @@ a.button {
 }
 </style>
 </head>
-<body> 
 
+<body> 
 <?php
 session_start();
 $castor = $morcego = $phoenix = 0;
@@ -61,7 +64,6 @@ function test_input($data) {
    $data = htmlspecialchars($data);
    return $data;
 }
-
 $_SESSION['castor'] = $castor;
 $_SESSION['morcego'] = $morcego;
 $_SESSION['phoenix'] = $phoenix;
@@ -69,41 +71,25 @@ $_SESSION['comment'] = $comment;
 $_SESSION['data'] = $data;
 ?>
 
+<form method="get" action="./atualiza_pontuacao.php">
 <h2>Atualização da pontuação da tropa</h2>
-<form method="get" action="./atualiza_pontuacao.php"> 
-   Castor: <input type="text" name="castor" value="<?php echo $castor;?>" style="width: 50px;">
-   Morcego: <input type="text" name="morcego" value="<?php echo $morcego;?>" style="width: 50px;">
-   Phoenix: <input type="text" name="phoenix" value="<?php echo $phoenix;?>" style="width: 50px;">
-   <br><br>
-   Commentários: <textarea name="comment" rows="5" style="width: 240px;"><?php echo $comment;?></textarea>
-   <br><br>
-   <input type="submit" value="Adicionar Pontos">
-</form>
+<table style="width=80%">
+<tr><td> Castor: </td>
+	<td><input type="text" name="castor" value="<?php echo $castor;?>" style="width: 50px;"></td>
+</tr>
+<tr><td> Morcego: </td>
+   <td> <input type="text" name="morcego" value="<?php echo $morcego;?>" style="width: 50px;"><br></td>
+</tr>
+<tr><td> Phoenix: </td>
+   <td> <input type="text" name="phoenix" value="<?php echo $phoenix;?>" style="width: 50px;"><br></td>
+</tr>
+</table>
+<table style="width=80%">
+<tr><td>Commentários: </td></tr>
+<tr><td><textarea name="comment" rows="15" style="width: 333px;"><?php echo $comment;?></textarea></td></tr>
+</table>
+<input type="submit" value="Adicionar Pontos">
 
-<?php
-if( $castor || $morcego || $phoenix || $comment || $data ){
-	echo "<h2>Sua entrada:</h2>";
-	if( $castor ){
-		echo $castor;
-		echo "<br>";
-	}
-	if( $morcego ){
-		echo $morcego;
-		echo "<br>";
-	}
-	if( $phoenix ){
-		echo $phoenix;
-		echo "<br>";
-	}	
-	if( $comment ){
-		echo $comment;
-		echo "<br>";
-	}
-	if( $data ){
-		echo $data;
-		echo "<br>";
-	}
-}
-?>
+</form>
 </body>
 </html>
