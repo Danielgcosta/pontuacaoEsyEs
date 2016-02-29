@@ -1,34 +1,74 @@
+<html>
+<head>
+<style>
+.error {color: #FF0000;}
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+</style>
+</head>
+<body>
+
 <?php
+session_start();
 require "./init.php";
 
-$patrol = 'Phoenix';
-$atualizacao = 25;
+//Atualizações
+$castor=$_GET['castor'];
+$morcego=$_GET['morcego'];
+$phoenix=$_GET['phoenix'];
+$comment=$_GET['comment'];
+$data = date("Y-m-d") ;
+$row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `data` DESC LIMIT 1"));
 
-//Pega valor atual
-$server_name='localhost';
-$mysql_user='root';
-$mysql_pass='';
-$db_name='tropaescoteira';
-$conn=mysqli_connect($server_name,$mysql_user,$mysql_pass,$db_name);
-if (!$conn){
-	echo "Não foi possivel conectar à base da pontuação".mysqli_connect_error(); 
-}
-else
-{
-	echo "<h3>Conectado à base de dados com sucesso. </h3>";
-}
+$castorIncremento = $castor;
+$morcegoIncremento = $morcego;
+$phoenixIncremento = $phoenix;
 
-$select_sql = "SELECT * FROM `pontuacao` WHERE `patrol` LIKE '$patrol' ORDER BY `patrol` ASC";
-$result = mysqli_query($conn,$select_sql);
-$row = mysqli_fetch_array($result);
-$pontuacao = $row["score"];
+$castorAnterior = $row_score[0];
+$morcegoAnterior = $row_score[1];
+$phoenixAnterior = $row_score[2];
 
-//Atualiza
-$pontuacao=$pontuacao+$atualizacao;
-mysqli_query($conn,"DELETE FROM `pontuacao` WHERE `patrol` LIKE '$patrol'");
-mysqli_query($conn,"INSERT INTO `pontuacao`(`patrol`, `score`) VALUES ('$patrol',$pontuacao)");
+$castor = $castor + $castorAnterior;
+$morcego = $morcego + $morcegoAnterior;
+$phoenix = $phoenix + $phoenixAnterior;
+$sql = "INSERT INTO `pontuacao`(`castor`, `morcego`, `phoenix`, `data`) VALUES ('$castor','$morcego','$phoenix','$data')";
+mysqli_query($conn,$sql);
+$row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `data` DESC LIMIT 1"));
 mysqli_close($conn);
 
-echo "Pontuacao atualizada";
-echo $pontuacao;
+$_SESSION['castor'] = $castor;
+$_SESSION['morcego'] = $morcego;
+$_SESSION['phoenix'] = $phoenix;
+$_SESSION['comment'] = $comment;
+$_SESSION['data'] = $data;
 ?>
+
+<h3>Pontuacao atualizada</h3>
+<form method="get" action="./quadroDePontuacao.php"> 
+	Data da última atualização: <?php echo $row_score[3] ?>
+	<h2>Castor</h2>
+	Valor anterior: <?php echo $castorAnterior ?><br>
+	Atualização: <?php echo $castorIncremento ?><br>
+	Valor atual: <?php echo $castor ?><br>
+	
+	<h2>Morcego</h2>
+	Valor anterior: <?php echo $morcegoAnterior ?><br>
+	Atualização: <?php echo $morcegoIncremento ?><br>
+	Valor atual: <?php echo $morcego ?><br>
+	
+	<h2>Phoenix</h2>
+	Valor anterior: <?php echo $phoenixAnterior ?><br>
+	Atualização: <?php echo $phoenixIncremento ?><br>
+	Valor atual: <?php echo $phoenix ?><br>
+	<br>
+	<br>
+   <input type="submit" value="Voltar">
+</form>
+</body>
+</html>

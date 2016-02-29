@@ -8,8 +8,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 $row_ciclo = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `ano_e_ciclo` ORDER BY `ano` DESC LIMIT 1"));
 $row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `data` DESC LIMIT 1"));
 ?>
-<script>
-	
+<script>	
 // Ajustando a data para dd/mm/yyyy
 	var data = new Date("<?php echo $row_score[3]; ?>");
 	var dd = data.getDate();
