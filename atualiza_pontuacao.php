@@ -3,7 +3,7 @@
 
 <head>
 <title>Pontuação atualizada</title>
-<meta name="wot-verification" charset="utf-8" content='width=device-width, initial-scale=1,maximum-scale=2'; charset='utf-8'>
+<meta name="wot-verification" content='width=device-width, initial-scale=1,maximum-scale=2'; charset='utf-8'>
 
 <style>
 .error {color: #FF0000;}
@@ -15,27 +15,6 @@ a.button {
     color: initial;
 }
 </style>
-
-<script type="text/javascript">
-function acceptButtonCallback(){
-	<?php
-	$sql = "INSERT INTO `pontuacao`(`castor`, `morcego`, `phoenix`, `data`) VALUES ('$castor','$morcego','$phoenix','$data')";
-	$row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `data` DESC LIMIT 1"));
-	$_SESSION['castor'] = $castor;
-	$_SESSION['morcego'] = $morcego;
-	$_SESSION['phoenix'] = $phoenix;
-	$_SESSION['comment'] = $comment;
-	$_SESSION['data'] = $data;
-	mysqli_close($conn);
-	?>
-	window.location.href = "./quadroDePontuacao.php";
-}
-
-function cancelButtonCallback(){
-	<?php mysqli_close($conn); ?>
-	window.location.href = "./quadroDePontuacao.php";
-}
-</script>
 </head>
 
 <body>
@@ -43,30 +22,26 @@ function cancelButtonCallback(){
 require "./init.php";
 
 //Atualizações
-$castor=$_GET['castor'];
-$morcego=$_GET['morcego'];
-$phoenix=$_GET['phoenix'];
-$comment=$_GET['comment'];
+$castorIncremento=$_POST['castor'];
+$morcegoIncremento=$_POST['morcego'];
+$phoenixIncremento=$_POST['phoenix'];
+$comment=$_POST['comment'];
 $data = date("Y-m-d") ;
 $row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `data` DESC LIMIT 1"));
-
-$castorIncremento = $castor;
-$morcegoIncremento = $morcego;
-$phoenixIncremento = $phoenix;
 
 $castorAnterior = $row_score[0];
 $morcegoAnterior = $row_score[1];
 $phoenixAnterior = $row_score[2];
 
-$castor = $castor + $castorAnterior;
-$morcego = $morcego + $morcegoAnterior;
-$phoenix = $phoenix + $phoenixAnterior;
+$castor = $castorIncremento + $castorAnterior;
+$morcego = $morcegoIncremento + $morcegoAnterior;
+$phoenix = $phoenixIncremento + $phoenixAnterior;
 ?>
 
 <script type="text/javascript">
 var data = new Date("<?php echo $row_score[3]; ?>");
 var dd = data.getDate()+1;
-var mm = data.getMonth()+1; //January is 0!
+var mm = data.getMonth()+1;
 var yyyy = data.getFullYear();
 if(dd<10) {
 	dd='0'+dd;
@@ -75,9 +50,22 @@ if(mm<10) {
 	mm='0'+mm;
 }
 data = dd+'/'+mm+'/'+yyyy;
-</script>;
 
-<form name="action" method="post">	
+function okCallback(){
+<?php
+if(isset($_GET['Aceitar'])){
+	$sql = "INSERT INTO `pontuacao`(`castor`, `morcego`, `phoenix`, `data`) VALUES ('$castor','$morcego','$phoenix','$data')";
+	mysqli_close($conn);
+}
+else	
+{
+	mysqli_close($conn);
+}
+?>
+}
+</script>
+
+<div align="center">	
 <h3>Revisão da entrada</h3>
 	Data da Última atualização: <script type="text/javascript">document.write(data);</script>
 	<h2>Castor</h2>
@@ -96,20 +84,12 @@ data = dd+'/'+mm+'/'+yyyy;
 	Valor atual: <?php echo $phoenix ?><br>
 	<br>
 	<br>
-	<input type="button" name="ok_button" value = "Aceitar" onClick="acceptButtonCallback()"/>
-</form>
-
-<?php
-if(isset($_POST['Aceitar'])){
-	$sql = "INSERT INTO `pontuacao`(`castor`, `morcego`, `phoenix`, `data`) VALUES ('$castor','$morcego','$phoenix','$data')";
-	$row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `data` DESC LIMIT 1"));
-	$_SESSION['castor'] = $castor;
-	$_SESSION['morcego'] = $morcego;
-	$_SESSION['phoenix'] = $phoenix;
-	$_SESSION['comment'] = $comment;
-	$_SESSION['data'] = $data;
-	mysqli_close($conn);
-}
-?>
+	<form action="./quadroDePontuacao.php" type="get" onSubmit="return okCallback('ok')">
+		<input type="submit" value="Aceitar">
+	</form>
+	<form action="./quadroDePontuacao.php" type="get" onSubmit="return okCallback('cancel')">
+		<input type="submit" value="Cancelar">
+	</form>
+</div>
 </body>
 </html>
