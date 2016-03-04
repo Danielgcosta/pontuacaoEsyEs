@@ -69,27 +69,54 @@ else
 <h3>Revisão da entrada</h3>
 	Data da Última atualização: <script type="text/javascript">document.write(data);</script>
 	<h2>Castor</h2>
-	Valor anterior: <?php echo $castorAnterior ?><br>
-	Atualização: <?php echo $castorIncremento ?><br>
+	<?php
+	if( $castorIncremento != 0 ) { 
+	?>
+		Valor anterior: <?php echo $castorAnterior ?><br>
+		Atualização: <?php echo $castorIncremento ?><br>
+	<?php
+	}
+	?>	
 	Valor atual: <?php echo $castor ?><br>
 	
 	<h2>Morcego</h2>
+	<?php
+	if( $morcegoIncremento != 0 ) { 
+	?>
 	Valor anterior: <?php echo $morcegoAnterior ?><br>
 	Atualização: <?php echo $morcegoIncremento ?><br>
+	<?php
+	}
+	?>		
 	Valor atual: <?php echo $morcego ?><br>
 	
 	<h2>Phoenix</h2>
+	<?php
+	if( $phoenixIncremento != 0 ) { 
+	?>	
 	Valor anterior: <?php echo $phoenixAnterior ?><br>
 	Atualização: <?php echo $phoenixIncremento ?><br>
-	Valor atual: <?php echo $phoenix ?><br>
+	<?php
+	}
+	?>	
+	Valor atual: <?php echo $phoenix ?><br>	
 	<br>
 	<br>
+	
+	<?php
+	if( $phoenixIncremento != 0 || $castorIncremento != 0 || $phoenixIncremento != 0  ) { 
+	?>	
 	<form action="./quadroDePontuacao.php" type="get" onSubmit="return okCallback('ok')">
 		<input type="submit" value="Aceitar">
 	</form>
+	<?php
+	}
+	?>	
+	
 	<form action="./quadroDePontuacao.php" type="get" onSubmit="return okCallback('cancel')">
 		<input type="submit" value="Cancelar">
 	</form>
+	
 </div>
 </body>
 </html>
