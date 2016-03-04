@@ -19,7 +19,7 @@ a.button {
 <body> 
 <?php
 require "./init.php";
-$row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `data` DESC LIMIT 1"));
+$row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `indice` DESC"));
 $castor = 0;
 $morcego = 0;
 $phoenix = 0;

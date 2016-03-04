@@ -27,7 +27,7 @@ $morcegoIncremento=$_POST['morcego'];
 $phoenixIncremento=$_POST['phoenix'];
 $comment=$_POST['comment'];
 $data = date("Y-m-d") ;
-$row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `data` DESC LIMIT 1"));
+$row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `indice` DESC"));
 
 $castorAnterior = $row_score[0];
 $morcegoAnterior = $row_score[1];
@@ -51,17 +51,17 @@ if(mm<10) {
 }
 data = dd+'/'+mm+'/'+yyyy;
 
-function okCallback(){
-<?php
-if(isset($_GET['Aceitar'])){
+function okCallback(option){
+	if(option=="Aceitar"){
+	<?php
 	$sql = "INSERT INTO `pontuacao`(`castor`, `morcego`, `phoenix`, `data`) VALUES ('$castor','$morcego','$phoenix','$data')";
+	mysqli_query($conn,$sql);
+	?>
+	}
+	<?php
 	mysqli_close($conn);
-}
-else	
-{
-	mysqli_close($conn);
-}
-?>
+	?>
+	return true;	
 }
 </script>
 
@@ -103,18 +103,16 @@ else
 	<br>
 	<br>
 	
-	<?php
-	if( $phoenixIncremento != 0 || $castorIncremento != 0 || $phoenixIncremento != 0  ) { 
-	?>	
-	<form action="./quadroDePontuacao.php" type="get" onSubmit="return okCallback('ok')">
-		<input type="submit" value="Aceitar">
-	</form>
-	<?php
-	}
-	?>	
-	
-	<form action="./quadroDePontuacao.php" type="get" onSubmit="return okCallback('cancel')">
-		<input type="submit" value="Cancelar">
+
+	<form action="./quadroDePontuacao.php" type="post">
+		<?php
+			if( $phoenixIncremento != 0 || $castorIncremento != 0 || $phoenixIncremento != 0  ) { 
+		?>
+		<input name="ok" type="submit" value="Aceitar" onSubmit="return okCallback(this)">
+		<?php
+			}
+		?>
+		<input name="cancel" type="submit" value="Cancelar" onSubmit="return okCallback(this)">
 	</form>
 	
 </div>
