@@ -20,6 +20,7 @@ a.button {
 <body>
 <?php
 require "./init.php";
+header('Content-Type: text/html; charset=ISO-8859-1');
 
 //Atualizações
 $castorIncremento=$_POST['castor'];

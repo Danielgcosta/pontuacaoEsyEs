@@ -2,7 +2,7 @@
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 
 <head>
-<title>AtualizaÃ§Ã£o manual de pontuação</title>
+<title>Atualização manual de pontuação</title>
 <meta name="wot-verification" charset="utf-8" content='width=device-width, initial-scale=1,maximum-scale=2'; charset='utf-8'>
 <style>
 .error {color: #FF0000;}
@@ -19,6 +19,7 @@ a.button {
 <body> 
 <?php
 require "./init.php";
+header('Content-Type: text/html; charset=ISO-8859-1');
 $row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDER BY `indice` DESC"));
 $castor = 0;
 $morcego = 0;
@@ -29,7 +30,7 @@ $data = "";
 
 <div align="center">
 	<form method="post" action="./atualiza_pontuacao.php">
-		<h2>AtualizaÃ§Ã£o da pontuaÃ§Ã£o da tropa</h2>
+		<h2>Atualização da pontuação da tropa</h2>
 			<table style="width=80%">
 				<tr>
 					<td> Castor: </td>
@@ -69,7 +70,7 @@ if(isset($_POST["okButton"])) {
      $castor = 0;
    } else {
      $castor = test_input($_POST["castor"]);
-	 // Permite somente nÃºmeros
+	 // Permite somente números
      if (!preg_match("/-0123456789/",$castor)) {
        $castorErr = "Apenas nÃºmeros"; 
      }
@@ -78,7 +79,7 @@ if(isset($_POST["okButton"])) {
       $morcego = 0;
    } else {
      $morcego = test_input($_POST["morcego"]);
-	 // Permite somente nÃºmeros
+	 // Permite somente números
      if (!preg_match("/-0123456789/",$morcego)) {
        $morcegoErr = "Apenas nÃºmeros"; 
      }
@@ -87,7 +88,7 @@ if(isset($_POST["okButton"])) {
      $phoenix = 0;
    } else {
      $phoenix = test_input($_POST["phoenix"]);
-	 // Permite somente nÃºmeros
+	 // Permite somente números
      if (!preg_match("/-0123456789/",$phoenix)) {
        $phoenixErr = "Apenas nÃºmeros"; 
      }
