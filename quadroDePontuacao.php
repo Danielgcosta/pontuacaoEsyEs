@@ -9,7 +9,6 @@
 a.button {
     -webkit-appearance: button;
     -moz-appearance: button;
-    appearance: button;
 
     text-decoration: none;
     color: initial;

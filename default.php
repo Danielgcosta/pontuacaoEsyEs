@@ -27,13 +27,13 @@ $row_score = mysqli_fetch_row(mysqli_query($conn,"SELECT * FROM `pontuacao` ORDE
 	var pontos =[null,null,null];
 	var nomePatrulha = ["","",""];
 	var esferas = ["","",""];
-	var	colocacoes = ["1º","2º","3º"];
+	var	colocacoes = ["1ï¿½","2ï¿½","3ï¿½"];
 
 	var castorPontos  = <?php echo $row_score[0]; ?>;
 	var morcegoPontos = <?php echo $row_score[1]; ?>;
 	var phoenixPontos = <?php echo $row_score[2]; ?>;
 	
-//Definição da ordem das patrulhas
+//Definiç£¯ da ordem das patrulhas
 if (castorPontos > phoenixPontos)
 {
 	if (castorPontos > morcegoPontos) 
@@ -55,7 +55,7 @@ if (castorPontos > phoenixPontos)
 				nomePatrulha[1] = "Morcego";
 				pontos[2] = phoenixPontos;	//P2
 				nomePatrulha[2] = "Phoenix";
-				colocacoes = ["1º","2º","2º"];
+				colocacoes = ["1ï¿½","2ï¿½","2ï¿½"];
 			}
 			else	//C1, P2, M3
 			{
@@ -76,7 +76,7 @@ if (castorPontos > phoenixPontos)
 			nomePatrulha[1] = "Morcego";
 			pontos[2] = phoenixPontos;	//P2
 			nomePatrulha[2] = "Phoenix";
-			colocacoes = ["1º","1º","2º"];
+			colocacoes = ["1ï¿½","1ï¿½","2ï¿½"];
 		}
 		else	//M1, C2, P3
 		{
@@ -101,7 +101,7 @@ else
 			nomePatrulha[1] = "Phoenix";
 			pontos[2] = morcegoPontos;	//M2
 			nomePatrulha[2] = "Morcego";
-			colocacoes = ["1º","1º","2º"];			
+			colocacoes = ["1ï¿½","1ï¿½","2ï¿½"];			
 		}
 		else
 		{
@@ -113,7 +113,7 @@ else
 				nomePatrulha[1] = "Morcego";
 				pontos[2] = phoenixPontos;	//P1
 				nomePatrulha[2] = "Phoenix";
-				colocacoes = ["1º","1º","1º"];
+				colocacoes = ["1ï¿½","1ï¿½","1ï¿½"];
 			}
 			else	//M1, C2, P2
 			{
@@ -123,7 +123,7 @@ else
 				nomePatrulha[1] = "Castor";								
 				pontos[2] = phoenixPontos;	//P2
 				nomePatrulha[2] = "Phoenix";
-				colocacoes = ["1º","2º","2º"];
+				colocacoes = ["1ï¿½","2ï¿½","2ï¿½"];
 			}
 		}
 	}
@@ -148,7 +148,7 @@ else
 				nomePatrulha[1] = "Phoenix";	
 				pontos[2] = castorPontos;	//C2
 				nomePatrulha[2] = "Castor";					
-				colocacoes = ["1º","1º","2º"];
+				colocacoes = ["1ï¿½","1ï¿½","2ï¿½"];
 			}
 			else
 			{
@@ -169,7 +169,7 @@ else
 						nomePatrulha[1] = "Castor";							
 						pontos[2] = morcegoPontos;	//M2
 						nomePatrulha[2] = "Morcego";
-						colocacoes = ["1º","2º","2º"];						
+						colocacoes = ["1ï¿½","2ï¿½","2ï¿½"];						
 					}
 					else	//P1, C2, M3
 					{
@@ -185,7 +185,7 @@ else
 }
 
 
-//Definição das esferas das patrulhas
+//Definiç£¯ das esferas das patrulhas
 function defEsferas()
 {
 	switch (nomePatrulha[0]){
@@ -264,7 +264,7 @@ function defEsferas()
 </script>
 
 <HEAD>
-<TITLE>Pontuação das Patrulhas</TITLE>
+<TITLE>Pontuaç£¯ das Patrulhas</TITLE>
 <meta name="wot-verification" charset="utf-8" content='width=device-width, initial-scale=1,maximum-scale=2'; charset='utf-8'>
 <STYLE type="text/css">
 	* {
@@ -292,7 +292,6 @@ function defEsferas()
 		}
 	table {
 		margin:auto;
-		align: center;
 		}
 </STYLE> 
 </HEAD>
@@ -320,7 +319,7 @@ function defEsferas()
 	<tr height=100%>
 		<td></td>
 		<td>
-			<p><font size="6" color="green" font-family="Myriad Pro"><a><script type="text/javascript">document.write(ciclo);</script></a>º Ciclo de <a><script type="text/javascript">document.write(ano);</script></a> - Result. parcial<br>Pontuação das Patrulhas</font></p>
+			<p><font size="6" color="green" font-family="Myriad Pro"><a><script type="text/javascript">document.write(ciclo);</script></a>ï¿½ Ciclo de <a><script type="text/javascript">document.write(ano);</script></a> - Result. parcial<br>Pontuaç£¯ das Patrulhas</font></p>
 		</td>
 		<td></td>
 	</tr>
@@ -346,7 +345,7 @@ function defEsferas()
 				</tr>
 				<tr height="40" margin=0> <!--3 row-->
 					<td rowspan="3" align="center">
-						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere1">	<!--impressão da esfera do 1º lugar-->
+						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere1">	<!--impressã¯ da esfera do 1ï¿½ lugar-->
 						<img src="img/morcego.png" width="160" height="160" style="display: none;" id="morcegoSphere1"/>
 						<img src="img/phoenix.png" width="160" height="160" style="display: none;" id="phoenixSphere1"/>	
 					</td>
@@ -355,7 +354,7 @@ function defEsferas()
 				</tr>
 				<tr height="40"> <!--4 row-->
 					<td rowspan="3" align="center">
-						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere2">	<!--impressão da esfera do 2º lugar-->
+						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere2">	<!--impressã¯ da esfera do 2ï¿½ lugar-->
 						<img src="img/morcego.png" width="160" height="160" style="display: none;" id="morcegoSphere2"/>
 						<img src="img/phoenix.png" width="160" height="160" style="display: none;" id="phoenixSphere2"/>	
 					</td>
@@ -363,7 +362,7 @@ function defEsferas()
 				</tr>
 				<tr height="60"> <!--5 row-->
 					<td rowspan="3" align="center">
-						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere3">	<!--impressão da esfera do 3º lugar-->
+						<img src="img/castor.png" width="160" height="160" style="display: none;" id="castorSphere3">	<!--impressã¯ da esfera do 3ï¿½ lugar-->
 						<img src="img/morcego.png" width="160" height="160" style="display: none;" id="morcegoSphere3"/>
 						<img src="img/phoenix.png" width="160" height="160" style="display: none;" id="phoenixSphere3"/>	
 					</td>
@@ -387,8 +386,8 @@ function defEsferas()
 		<td></td>
 		<td height="18" align="right">
 
-<!--comentado até atualizar a listagem de pontuação 
-			<a href="http://www.pontuacao.esy.es/img/listaPontos.png" target="_blank"><font size="2" color="white">Veja aqui as regras de pontuação</a></font>
+<!--comentado até ¡tualizar a listagem de pontuaç£¯ 
+			<a href="http://www.pontuacao.esy.es/img/listaPontos.png" target="_blank"><font size="2" color="white">Veja aqui as regras de pontuaç£¯</a></font>
 -->	
 			<font size="2" color="yellow">(atualizado em <a><script type="text/javascript">document.write(data);</script></a>)</font>
 		</td>

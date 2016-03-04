@@ -1,0 +1,17 @@
+<?php
+//$server_name='mysql.hostinger.com.br';
+//$mysql_user='u337466288_root';
+//$mysql_pass='ArRNL8byll';
+//$db_name='u337466288_db';
+
+$server_name='localhost';
+$mysql_user='root';
+$mysql_pass='';
+$db_name='tropaescoteira';
+
+$conn=mysqli_connect($server_name,$mysql_user,$mysql_pass,$db_name);
+if (!$conn){
+	echo "Nao foi possivel conectar a base da pontuacao".mysqli_connect_error(); 
+}
+mysqli_set_charset($conn, 'utf8mb4_bin');
+?>

@@ -97,6 +97,7 @@ data = dd+'/'+mm+'/'+yyyy;
 	<br>
 	<br>
 	<input type="button" name="ok_button" value = "Aceitar" onClick="acceptButtonCallback()"/>
+	<input type="button" name="cancel_button" value = "Cancelar" onClick="cancelButtonCallback()"/>
 </form>
 
 <?php

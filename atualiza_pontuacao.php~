@@ -2,7 +2,7 @@
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 
 <head>
-<title>Pontuação atualizada</title>
+<title>PontuaÃ§Ã£o atualizada</title>
 <meta name="wot-verification" charset="utf-8" content='width=device-width, initial-scale=1,maximum-scale=2'; charset='utf-8'>
 
 <style>
@@ -35,14 +35,15 @@ function cancelButtonCallback(){
 	<?php mysqli_close($conn); ?>
 	window.location.href = "./quadroDePontuacao.php";
 }
-</script>
+</script>;
 </head>
 
 <body>
 <?php
+session_start();
 require "./init.php";
 
-//Atualizações
+//AtualizaÃ§Ãµes
 $castor=$_GET['castor'];
 $morcego=$_GET['morcego'];
 $phoenix=$_GET['phoenix'];
@@ -78,25 +79,26 @@ data = dd+'/'+mm+'/'+yyyy;
 </script>;
 
 <form name="action" method="post">	
-<h3>Revisão da entrada</h3>
-	Data da Última atualização: <script type="text/javascript">document.write(data);</script>
+<h3>RevisÃ£o da entrada</h3>
+	Data da Ãºltima atualizaÃ§Ã£o: <script type="text/javascript">document.write(data);</script>
 	<h2>Castor</h2>
 	Valor anterior: <?php echo $castorAnterior ?><br>
-	Atualização: <?php echo $castorIncremento ?><br>
+	AtualizaÃ§Ã£o: <?php echo $castorIncremento ?><br>
 	Valor atual: <?php echo $castor ?><br>
 	
 	<h2>Morcego</h2>
 	Valor anterior: <?php echo $morcegoAnterior ?><br>
-	Atualização: <?php echo $morcegoIncremento ?><br>
+	AtualizaÃ§Ã£o: <?php echo $morcegoIncremento ?><br>
 	Valor atual: <?php echo $morcego ?><br>
 	
 	<h2>Phoenix</h2>
 	Valor anterior: <?php echo $phoenixAnterior ?><br>
-	Atualização: <?php echo $phoenixIncremento ?><br>
+	AtualizaÃ§Ã£o: <?php echo $phoenixIncremento ?><br>
 	Valor atual: <?php echo $phoenix ?><br>
 	<br>
 	<br>
 	<input type="button" name="ok_button" value = "Aceitar" onClick="acceptButtonCallback()"/>
+	<input type="button" name="cancel_button" value = "Cancelar" onClick="cancelButtonCallback()"/>
 </form>
 
 <?php
